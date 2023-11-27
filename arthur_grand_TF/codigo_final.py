@@ -15,25 +15,22 @@ def mostrar_linhas_colunas():
 def busca_parcial():
     coluna_filtro = input("Escolha entre uma das colunas:\n1. HP\n2. Tamanho\n3. Tipo\n4. Alinhamento\n5. Classe de Armadura\n6. Locomoção\n7. Línguas\n8. Nível de Dificuldade\n")
 
-    # Converta coluna_filtro para inteiro
-    coluna_filtro = int(coluna_filtro)
-
     # Funções específicas de filtragem
-    if coluna_filtro == 1:
+    if coluna_filtro == '1':
         df_filtrado = df[['Name', 'HP']]
-    elif coluna_filtro == 2:
+    elif coluna_filtro == '2':
         df_filtrado = df[['Name', 'Size']]
-    elif coluna_filtro == 3:
+    elif coluna_filtro == '3':
         df_filtrado = df[['Name', 'Type']]
-    elif coluna_filtro == 4:
+    elif coluna_filtro == '4':
         df_filtrado = df[['Name', 'Align.']]
-    elif coluna_filtro == 5:
+    elif coluna_filtro == '5':
         df_filtrado = df[['Name', 'AC']]
-    elif coluna_filtro == 6:
+    elif coluna_filtro == '6':
         df_filtrado = df[['Name', 'Speeds']]
-    elif coluna_filtro == 7:
+    elif coluna_filtro == '7':
         df_filtrado = df[['Name', 'Languages']]
-    elif coluna_filtro == 8:
+    elif coluna_filtro == '8':
         df_filtrado = df[['Name', 'CR']]
     else:
         print("--------------------\nEscolha uma opção válida!")
@@ -100,9 +97,11 @@ def busca_especifica():
     
     termo_busca = input(f"Informe o termo de busca para a coluna '{coluna_escolhida}': ")
     
-    # Realiza a busca exata apenas na coluna escolhida (HP, AC, CR)
-    if coluna_escolhida in ['HP', 'AC', 'CR']:
+    # Realiza a busca exata apenas na coluna escolhida (HP, AC)
+    if coluna_escolhida in ['HP', 'AC']:
         resultado_busca = df[df[coluna_escolhida].astype(str) == termo_busca]
+    elif coluna_escolhida in ['CR']:
+        resultado_busca = df[df[coluna_escolhida].astype(str) == termo_busca + '.0']
     else:
         resultado_busca = df[df[coluna_escolhida].apply(lambda cell: str(termo_busca).lower() in str(cell).lower())]
     
